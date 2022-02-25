@@ -371,7 +371,6 @@ def train_dgl(
         prepare_batch=prepare_batch,
         device=device,
         amp_mode='amp' if config.mixed_precision else None,
-        scaler=True,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -381,7 +380,6 @@ def train_dgl(
         prepare_batch=prepare_batch,
         device=device,
         amp_mode='amp' if config.mixed_precision else None,
-        scaler=True,
         # output_transform=make_standard_scalar_and_pca,
     )
 

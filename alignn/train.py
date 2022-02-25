@@ -311,7 +311,7 @@ def train_dgl(
     criterion = criteria[config.criterion]
 
     # set up training engine and evaluators
-    metrics = {"loss": Loss(criterion), "mae": MeanAbsluteError()}
+    metrics = {"loss": Loss(criterion), "mae": MeanAbsoluteError()}
     if config.model.output_features > 1 and config.standard_scalar_and_pca:
         # metrics = {"loss": Loss(criterion), "mae": MeanAbsoluteError()}
         metrics = {

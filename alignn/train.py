@@ -311,7 +311,7 @@ def train_dgl(
     criterion = criteria[config.criterion]
 
     # set up training engine and evaluators
-    metrics = {"loss": Loss(criterion), "mae": MeanAbsoluteError()}
+    metrics = {"loss": Loss(criterion), "mae": MeanAbsluteError()}
     if config.model.output_features > 1 and config.standard_scalar_and_pca:
         # metrics = {"loss": Loss(criterion), "mae": MeanAbsoluteError()}
         metrics = {
@@ -360,6 +360,7 @@ def train_dgl(
         prepare_batch=prepare_batch,
         device=device,
         deterministic=deterministic,
+        amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -368,6 +369,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
+        amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -376,6 +378,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
+        amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 

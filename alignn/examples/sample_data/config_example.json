@@ -36,6 +36,7 @@
     "cutoff": 8.0,
     "max_neighbors": 12,
     "keep_data_order": false,
+    "mixed_precision": true,
     "model": {
         "name": "alignn",
         "alignn_layers": 4,

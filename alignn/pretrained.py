@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Module to download and load pre-trained ALIGNN models."""
 import requests
 import os
@@ -244,6 +242,7 @@ def get_prediction(
 
 def get_multiple_predictions(
     atoms_array=[],
+    idx_array=[],
     cutoff=8,
     neighbor_strategy="k-nearest",
     max_neighbors=12,
@@ -270,7 +269,8 @@ def get_multiple_predictions(
     # get_multiple_predictions(atoms_array=atoms_array)
 
     mem = []
-    for i, ii in enumerate(atoms_array):
+    zipper = zip(idx_array, atoms_array) if idx_array else enumerate(idx_array, atoms_array)
+    for i, ii in zipper:
         info = {}
         info["atoms"] = ii.to_dict()
         info["prop"] = -9999  # place-holder only
@@ -338,11 +338,13 @@ def get_multiple_predictions(
     df2 = pd.DataFrame(results)
     df2["jid"] = df2["id"]
     df3 = pd.merge(df1, df2, on="jid")
+    df3[['id', 'pred']].to_csv(filename.split('.')[0] + '.csv')
+
     save = []
     for i, ii in df3.iterrows():
         info = {}
         info["id"] = ii["id"]
-        info["atoms"] = ii["atoms"]
+#        info["atoms"] = ii["atoms"]
         info["pred"] = ii["pred"]
         save.append(info)
 
@@ -366,14 +368,15 @@ if __name__ == "__main__":
     else:
         raise NotImplementedError("File format not implemented", file_format)
 
-    out_data = get_prediction(
-        model_name=model_name, cutoff=float(cutoff), atoms=atoms
-    )
+    # out_data = get_prediction(
+    #     model_name=model_name, cutoff=float(cutoff), atoms=atoms
+    # )
 
-    print("Predicted value:", model_name, file_path, out_data)
-    # import glob
-    # atoms_array = []
-    # for i in glob.glob("alignn/examples/sample_data/*.vasp"):
-    #    atoms = Atoms.from_poscar(i)
-    #    atoms_array.append(atoms)
-    # get_multiple_predictions(atoms_array=atoms_array)
+    # print("Predicted value:", model_name, file_path, out_data)
+    import glob
+    atoms_array = []
+    for i in glob.glob("alignn/examples/sample_data/*.vasp"):
+       atoms = Atoms.from_poscar(i)
+       atoms_array.append(atoms)
+    get_multiple_predictions(atoms_array=atoms_array, model_name=model_name)
+

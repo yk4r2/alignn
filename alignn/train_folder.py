@@ -61,6 +61,7 @@ parser.add_argument(
 def train_for_folder(
     root_dir="examples/sample_data",
     config_name="config.json",
+    model=None,
     keep_data_order=False,
     classification_threshold=None,
     batch_size=None,
@@ -72,7 +73,7 @@ def train_for_folder(
     # config_dat=os.path.join(root_dir,config_name)
     id_prop_dat = os.path.join(root_dir, "id_prop.csv")
     config = loadjson(config_name)
-    if type(config) is dict:
+    if isinstance(config, dict):
         try:
             config = TrainingConfig(**config)
         except Exception as exp:
@@ -178,7 +179,8 @@ def train_for_folder(
     )
     t1 = time.time()
     train_dgl(
-        config,
+        config=config,
+        model=model,
         train_val_test_loaders=[
             train_loader,
             val_loader,

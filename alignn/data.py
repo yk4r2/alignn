@@ -107,11 +107,11 @@ def load_graphs(
     else:
         cachefile = None
 
-    if cachefile is not None and cachefile.is_file():
-        graphs, labels = dgl.load_graphs(str(cachefile))
+    if cachefile is not None and os.path.isfile(fname).is_file():
+        graphs, labels = dgl.load_graphs(cachefile)
     else:
         graphs = df["atoms"].progress_apply(atoms_to_graph).values
-        dgl.save_graphs(str(cachefile), graphs.tolist())
+        dgl.save_graphs(cachefile, graphs.tolist())
 
     return graphs
 

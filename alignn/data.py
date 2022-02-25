@@ -103,7 +103,7 @@ def load_graphs(
     if cachedir is not None:
         if os.path.exists(cachedir):
             os.makedirs(cachedir)
-        cachefile = cachedir / f"{name}-{neighbor_strategy}.bin"
+        cachefile = cachedir + f"{name}-{neighbor_strategy}.bin"
     else:
         cachefile = None
 

@@ -101,6 +101,8 @@ def load_graphs(
         )
 
     if cachedir is not None:
+        if os.path.exists(cachedir):
+            os.makedirs(cachedir)
         cachefile = cachedir / f"{name}-{neighbor_strategy}.bin"
     else:
         cachefile = None
@@ -205,6 +207,7 @@ def get_torch_dataset(
         use_canonize=use_canonize,
         cutoff=cutoff,
         max_neighbors=max_neighbors,
+        cachedir='cache/',
     )
 
     data = StructureDataset(

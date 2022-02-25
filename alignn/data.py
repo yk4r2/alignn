@@ -333,7 +333,7 @@ def get_train_val_loaders(
             d = tmp
         for i in d:
             if isinstance(i[target], list):  # multioutput target
-                all_targets.append(torch.tensor(i[target]))
+                all_targets.append(torch.tensor(i[target]))#.half())
                 dat.append(i)
 
             elif (

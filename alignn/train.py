@@ -81,8 +81,8 @@ def make_standard_scalar_and_pca(output):
     """Use standard scalar and PCS for multi-output data."""
     sc = pk.load(open(os.path.join(tmp_output_dir, "sc.pkl"), "rb"))
     y_pred, y = output
-    y_pred = torch.tensor(sc.transform(y_pred.cpu().numpy()), device=device)
-    y = torch.tensor(sc.transform(y.cpu().numpy()), device=device)
+    y_pred = torch.tensor(sc.transform(y_pred.cpu().numpy()), device=device)#.half()
+    y = torch.tensor(sc.transform(y.cpu().numpy()), device=device)#.half()
     # pc = pk.load(open("pca.pkl", "rb"))
     # y_pred = torch.tensor(pc.transform(y_pred), device=device)
     # y = torch.tensor(pc.transform(y), device=device)
@@ -360,7 +360,7 @@ def train_dgl(
         prepare_batch=prepare_batch,
         device=device,
         deterministic=deterministic,
-        amp_mode='amp' if config.mixed_precision else None,
+        # amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -369,7 +369,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
-        amp_mode='amp' if config.mixed_precision else None,
+        # amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -378,7 +378,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
-        amp_mode='amp' if config.mixed_precision else None,
+        # amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 

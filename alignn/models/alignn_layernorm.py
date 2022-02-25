@@ -260,7 +260,7 @@ class ALIGNN(nn.Module):
             avg_gap = 0.7  # magic number -- average bandgap in dft_3d
             self.fc.bias.data = torch.tensor(
                 np.log(avg_gap), dtype=torch.float
-            )
+            )#.half()
         elif config.link == "logit":
             self.link = torch.sigmoid
 

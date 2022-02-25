@@ -186,7 +186,7 @@ class ACGCNN(nn.Module):
                 # np.log(2.1), dtype=torch.float
                 2.1,
                 dtype=torch.float,
-            )
+            )#.half()
             if self.classification:
                 raise ValueError(
                     "Classification not implemented with ZIG loss."
@@ -210,7 +210,7 @@ class ACGCNN(nn.Module):
             if not self.zero_inflated:
                 self.fc_out.bias.data = torch.tensor(
                     np.log(avg_gap), dtype=torch.float
-                )
+                )#.half()
         elif config.link == "logit":
             self.link = torch.sigmoid
 

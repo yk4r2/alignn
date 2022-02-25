@@ -360,8 +360,8 @@ def train_dgl(
         prepare_batch=prepare_batch,
         device=device,
         deterministic=deterministic,
-        amp_mode='amp' if config.mixed_precision else None,
-        scaler=True,
+        # amp_mode='amp' if config.mixed_precision else None,
+        # scaler=True,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -370,7 +370,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
-        amp_mode='amp' if config.mixed_precision else None,
+        # amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
@@ -379,7 +379,7 @@ def train_dgl(
         metrics=metrics,
         prepare_batch=prepare_batch,
         device=device,
-        amp_mode='amp' if config.mixed_precision else None,
+        # amp_mode='amp' if config.mixed_precision else None,
         # output_transform=make_standard_scalar_and_pca,
     )
 
